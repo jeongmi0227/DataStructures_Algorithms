@@ -46,6 +46,47 @@ logFirstTwoBoxes(boxes);    // O(2)
 //  Rule Book
 //  Rule 1: Worst Case
 //  Think about the worst case scenario, because in temrs of scalability, we can't assume things are going well.
+
 //  Rule 2: Remove Constants
+//  BigO(n+100) Drop the constants => BigO(n)
+//  The way the line increases is still linear.
+//  With BigO, we don't really care about how steep the line is, instead, we care about how the line moves as our inputs increase.
+function compresBoxesTwice(boxes) {
+    boxes.forEach(function (boxes) {
+        console.log(boxes); 
+    }); //O(n)
+    boxes.forEach(function (boxes) {
+        console.log(boxes); 
+    }); //O(n)
+}   // O(2n) => O(n)
+
 //  Rule 3: Different terms for inputs
+//  Any step that happens in the same indentation +
+//  Any step that is nested *
+function compresBoxesTwice(boxes,boxes2) {
+    boxes.forEach(function (boxes) {
+        console.log(boxes); 
+    }); // O(a)
+    boxes2.forEach(function (boxes) {
+        console.log(boxes); 
+    }); // O(b)
+} 
+// O(a+b)
+
+// Log all pairs of array
+const box = ['a', 'b', 'c', 'd', 'e'];
+function logAllPairsOfArray(array) {
+    for (let i = 0; i < array.length; i++){
+        for (let j = 0; j < array.length; j++){
+            console.log(i, j);
+        }
+    }
+}
+logAllPairsOfArray(box);
+// O (n*n) => O(n^2)
+
+// O(n^2) - Quadratic Time (Horrible)
+// a lot of interview questions require us to solve a problem that initially is O(n^2)=> O(n log n), O(n) even better
+
 //  Rule 4: Drop Non Dominants
+//  O(n^2+3n+100+n/2) => O(n^2) Think about scalability only keep Dominants terms
