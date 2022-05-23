@@ -1,13 +1,14 @@
-/**
+/*
  * What is good code?
  *  1. Readable
- *  2. Scalable (BigO)
+ *  2. Scalable (BigO) - Speed(CPU), Memory(RAM)
  *  BigO notation is the language we use for taking about how long an algorithm takes to run. 
  *  BigO and scalability of code, it simply means when we grow bigger and bigger with our input, how much does the algorithm slow down. BigO allows us and concerns us with how many steps it takes in a function.
  *  
- * */ 
+*/
+
 // BigO notation Types
-// O(n) : Linear Time(Fair), BigO depends on the number of ‘n’
+// O(n) : Linear Time(Fair) - for loops while loops, BigO depends on the number of ‘n’
 
 // ES5
 function compressAllBoxes(boxes) {
@@ -21,7 +22,7 @@ const compressAllBoxes = boxes => {
     boxes.forEach(box => console.log(box));
 }
 
-// O(1) : Constant Time(Excellent), takes the first item in the array number of operation is only one.
+// O(1) : Constant Time(Excellent) - no loops, takes the first item in the array number of operation is only one.
 // no matter how big this the number of boxes are, it always going to do the constant amount of time on a function.
 // It's a flat line in terms of salability. The same predictability when it comes to computing is very nice.
 function compressFirstBox(boxes) {
@@ -85,8 +86,30 @@ function logAllPairsOfArray(array) {
 logAllPairsOfArray(box);
 // O (n*n) => O(n^2)
 
-// O(n^2) - Quadratic Time (Horrible)
+// O(n^2) - Quadratic Time (Horrible) - every element in a collection needs to be compared to ever other element. Two nested loops
 // a lot of interview questions require us to solve a problem that initially is O(n^2)=> O(n log n), O(n) even better
 
 //  Rule 4: Drop Non Dominants
 //  O(n^2+3n+100+n/2) => O(n^2) Think about scalability only keep Dominants terms
+
+// Waht can cause time in a function 
+// Operations (+,-,*,/)
+// Comparsions(<,>,==)
+// Looping (for, while)
+// Outside Function call(function ())
+
+// O(n!) Factorial - you are adding a loop for every element.(DO NOT USE!!)
+
+/*
+ * Which code is best?
+ * Readable
+ * Memory (Space Complexity)
+ * Speed (Time Complexity)
+ */
+
+// What causes Space complexity?
+// Variables
+// Data structures
+// Function call
+// Allocations
+
