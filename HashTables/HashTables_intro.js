@@ -42,7 +42,7 @@ class HashTable{
         this.data = new Array(size);
     }
 
-    set(key, value) {
+    set(key, value) {   //O(1)
         let address = this._hash(key);
         if (!this.data[address]) {
             this.data[address] = [];
@@ -51,7 +51,7 @@ class HashTable{
         return this.data;
     }
 
-    get(key) {
+    get(key) {  // O(1)
         let address = this._hash(key);
         const currentBucket = this.data[address];
         if (currentBucket) {
@@ -63,7 +63,7 @@ class HashTable{
         }
         return undefined;
     }
-    // put _ means private (developer standard)
+    // put _ means private (developer standard) O(1)
     _hash(key) {
         let hash = 0;
         for (let i = 0; i < key.length; i++){
@@ -71,10 +71,86 @@ class HashTable{
         }
         return hash;
     }
+    keys() {
+        const keysArray = [];
+        for (let i = 0; i < this.data.length; i++){
+            if (this.data[i]) {
+                keysArray.push(this.data[i][0][0]);
+            }
+        }
+        return keysArray;
+    }
+    // values(key) {
+    //     for (let i = 0; i < this.data.length; i++){
+    //         if (this.data[i]&&this.data[i][0][0] === key) {
+    //             return this.data[i][0][1];
+    //         }
+    //     }
+    // }
+
 }
 
-const myHashTable = new HashTable(2);
+const myHashTable = new HashTable(50);
 console.log(myHashTable.set('grapes', 10000));
 console.log(myHashTable.set('apples', 50000));
 
 console.log(myHashTable.get('grapes'));
+console.log(myHashTable.keys());
+console.log(myHashTable.values('apples'));
+
+//Google Question (Recurring Character)
+//Given an array = [2,5,1,2,3,5,1,2,4]:
+//It should return 2
+
+//Given an array = [2,1,1,2,3,5,1,2,4]:
+//It should return 1
+
+//Given an array = [2,3,4,5]:
+//It should return undefined
+
+// version1 (Simple) 
+// function firstRecurringCharacter(input) {
+//     for (let i = 0; i < input.length; i++){
+//         for (let j = i+1; j < input.length; j++){
+//             if (input[i] === input[j]) {
+//                 return input[i];
+//             }
+//         }
+//     }
+//     return undefined;
+// }   //O(n^2)
+
+// version 2
+function firstRecurringCharacter(input) {
+    let map = {};
+    for (let i = 0; i < input.length; i++){
+        if (map[input[i]]!==undefined) {
+            return input[i];
+        } else {
+            map[input[i]] = i;
+        }
+    }
+    return undefined;
+}   // O(n) time complexity
+//O(1) space complexity 
+
+// My solution
+// function firstRecurringCharacter(input) {
+//     let arr = [];
+//     for (let i = 0; i < input.length; i++){
+//         if (arr[input[i]]==input[i]) {
+//             return input[i];
+//         } else {
+//             arr[input[i]]=input[i];    
+//         }
+//     }
+//     return undefined;
+// }
+
+const array1 = [2, 5, 1, 2, 3, 5, 1, 2, 4];
+const array2 = [2, 1, 1, 2, 3, 5, 1, 2, 4];
+const array3 = [2, 3, 4, 5];
+console.log(firstRecurringCharacter(array1));
+console.log(firstRecurringCharacter(array2));
+console.log(firstRecurringCharacter(array3));
+
