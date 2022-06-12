@@ -33,10 +33,8 @@ var k = 3;
  */
 var rotate = function (nums, k) {
     // O(n) Needs to improve time complexity 
-    for (let i = 0; i < k; i++){
-        nums.unshift(nums.splice(-1));
-    }
-
-    
+    let index = nums.length - (k % nums.length);
+    nums.unshift(...nums.splice(index));
+    console.log(nums);
 };
 rotate(nums, k);
