@@ -13,14 +13,19 @@
  * lookup O(n)
  * insert O(n)
  * delete O(n)
+ * 
+ * Pros and cons
+ * A singly linked list : less memory, delete and insert there is technically less operation.
+ * Downside is a signly linked list cannot be interated in reverse or traverse from back to front.
+ * It is suitable when we have less memory or memory is really expensive and main goal is that fast insertion and deletion as well as not much searching. Especially when we have insertion at the beinning of a list.
+ * 
+ * A doubly linked list : It can be iterated or traverse both from the front or from the back.
+ * Downside is fairly complex and it require more memeory and storage for extra property(previous node pointer)
+ * extra operation, It is good when we don't have that much limitation on memory and want good operation for searching for elements.
+ * 
+ * Most of time during interview, a singly linked list will be dicussed
  */
 
-class Node{
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-    }
-}
 class DoublyLinkedList{
     constructor(value) {
         this.head = {
@@ -38,8 +43,8 @@ class DoublyLinkedList{
             prev : null,
             next : null
         }
-        this.tail.next = newNode;
         newNode.prev = this.tail;
+        this.tail.next = newNode;
         this.tail = newNode;
         this.length++;
         return this;
@@ -62,8 +67,8 @@ class DoublyLinkedList{
             prev: null,
             next:null
         }
-        this.head.prev = newNode;
         newNode.next = this.head;
+        this.head.prev = newNode;
         this.head = newNode;
         this.length++;
         return this;
@@ -79,11 +84,11 @@ class DoublyLinkedList{
             next:null
         }
         const leader = this.traverseToIndex(index - 1);
-        const holdingPointer = leader.next;
-
-        newNode.prev = leader;
+        const follower = leader.next;
         leader.next = newNode;
-        newNode.next = holdingPointer;
+        newNode.prev = leader;
+        newNode.next = follower;
+        follower.prev = newNode;
         this.length++;
 
         return this;
@@ -102,9 +107,9 @@ class DoublyLinkedList{
     remove(index) {
         const leader = this.traverseToIndex(index - 1);
         const removeNode = leader.next;
-        const holdingNode = removeNode.next;
-        holdingNode.prev = removeNode.prev;
-        leader.next = holdingNode;
+        const follower = removeNode.next;
+        leader.next = follower;
+        follower.prev = leader;
         this.length--;
         return this;
 
@@ -113,7 +118,7 @@ class DoublyLinkedList{
 
 const doubly = new DoublyLinkedList(5);
 doubly.append(10);
-doubly.append(28);
+doubly.append(28)
 doubly.append(35);
 doubly.prepend(1);
 console.log(doubly.printList());
