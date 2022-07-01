@@ -8,6 +8,18 @@
 // link to next element until the last node points null.
 
 // Q1) Why linkedList ? When to use LinkedList instead of Array Hash?
+// linkedList vs Array
+// In an array, an element or elements are indexed, we can easily go to item based on index.
+// In linkedList, start at the head and traverse the list until get to item O(n)
+// Another advantage that array might have is that most computers have caching systems that make 
+// reading from sequential memory, that is memory right next to each other shelves right next to each other
+// faster than reading scattered addresses.
+// linkedList nodes are actually scattered all over memory like hash tables.
+// traversing or iterating through a linked list is usually a bit slower than array even though both are 0(n)
+
+// linkedList vs Hash tables
+// One advantae that it has over hash tables is that there is order to LinkedList
+// each node points to the next node, so we can have sorted data on like hash tables
 
 // prepend(add beinning of a link list) O(1)
 // append O(1)
@@ -87,27 +99,46 @@ class LinkedList{
 
         return array;
     }
-    //implementing
+    //implementing O(n)
     insert(index, value) {
-        const newNode = new Node(value);
-      
-        const newNode2 = new Node(this.head.value);
-        for (let i = 0; i <= index; i++){
-            console.log("i : "+i);
-            if (i === index) {
-                newNode.value = this.head.value;
-                newNode.next = this.head.next;
-            }else {
-                // newNode2.value = this.head.value;
-                // newNode2.next = this.head.next;
-                this.head.value = this.head.next.value;
-                this.head.next = this.head.next.next;
-                console.log(newNode2);
-                this.printList();
-            }
-            
-            
+        // solution
+        // check params
+        if (index >= this.length) {
+            return this.append(value);
         }
+
+        const newNode = {
+            value: value,
+            next: null
+        };
+        const leader = this.traverseToIndex(index - 1);
+        const holdingPointer = leader.next;
+        leader.next = newNode;
+        newNode.next = holdingPointer;
+        this.length++;
+        return this;
+    }
+    // lookup O(n)
+    traverseToIndex(index) {
+        // check params
+        let counter = 0;
+        let currentNode = this.head;
+   
+        while (counter !== index) {
+            currentNode = currentNode.next;
+            counter++;
+        }
+        
+        return currentNode;
+    }
+    // O(n)
+    remove(index) {
+        // check params
+        const leader = this.traverseToIndex(index - 1);
+        const removeNode = leader.next;
+        leader.next = removeNode.next;
+        this.length--;
+        return this;
     }
 }
 
@@ -115,8 +146,11 @@ const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
-// console.log(myLinkedList.printList());
+console.log(myLinkedList.printList());
 myLinkedList.insert(2, 99);
 console.log(myLinkedList.printList());
-// console.log(myLinkedList);
+myLinkedList.insert(20, 88);
+console.log(myLinkedList.printList());
+myLinkedList.remove(4);
+console.log(myLinkedList.printList());
 
