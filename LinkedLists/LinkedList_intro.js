@@ -142,7 +142,36 @@ class LinkedList{
     }
 
     reverse() {
-        
+
+        // solution
+        if (!this.head.next) {
+            return this.head;
+        }
+
+        let first = this.head;
+        this.tail = this.head;
+        let second = first.next;
+
+        while (second) {
+            const tmp = second.next;
+            second.next = first;
+            first = second;
+            second = tmp;
+        }
+
+        this.head.next = null;
+        this.head = first;
+        return this;
+
+        // // my solution 1 : used prepend and remove method O(n^2)
+        // let cnt = 1;
+        // let currentNode = this.head;
+        // while (cnt < this.length) {
+        //     currentNode = currentNode.next;
+        //     this.remove(cnt);
+        //     this.prepend(currentNode.value);
+        //     cnt++;
+        // }
     }
 }
 
@@ -157,6 +186,9 @@ myLinkedList.insert(20, 88);
 // console.log(myLinkedList.printList());
 myLinkedList.remove(4);
 console.log(myLinkedList.printList());
+myLinkedList.reverse();
+console.log(myLinkedList.printList());
+
 
 
 // Exercise : Reverse the a singly linked list
@@ -164,13 +196,13 @@ console.log(myLinkedList.printList());
 // [ 1, 10, 99, 5, 88 ] => [ 88, 5, 99, 10, 1 ]
 
 // my solution 1: Iterate each Node elements and prepend elements.
-let cnt = 1;
-let currentNode = myLinkedList.head;
-const newLinkedList = new LinkedList(myLinkedList.head.value);
-while (cnt < myLinkedList.length) {
-    currentNode = currentNode.next;
-    newLinkedList.prepend(currentNode.value);
-    cnt++;
-}
+// let cnt = 1;
+// let currentNode = myLinkedList.head;
+// const newLinkedList = new LinkedList(myLinkedList.head.value);
+// while (cnt < myLinkedList.length) {
+//     currentNode = currentNode.next;
+//     newLinkedList.prepend(currentNode.value);
+//     cnt++;
+// }
 
-console.log(newLinkedList.printList());
+// console.log(newLinkedList.printList());

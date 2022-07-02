@@ -41,11 +41,11 @@ class HashTable{
     constructor(size) {
         this.data = new Array(size);
     }
-
+    // 
     set(key, value) {   //O(1)
         let address = this._hash(key);
         if (!this.data[address]) {
-            this.data[address] = [];
+            this.data[address] = [];    // can modify arry into linked list so that a delete becomes a lot easier than if it was an array.
         } 
         this.data[address].push([key, value]);
         return this.data;
