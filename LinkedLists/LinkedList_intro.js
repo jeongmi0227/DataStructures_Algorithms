@@ -140,17 +140,37 @@ class LinkedList{
         this.length--;
         return this;
     }
+
+    reverse() {
+        
+    }
 }
 
 const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
-console.log(myLinkedList.printList());
+// console.log(myLinkedList.printList());
 myLinkedList.insert(2, 99);
-console.log(myLinkedList.printList());
+// console.log(myLinkedList.printList());
 myLinkedList.insert(20, 88);
-console.log(myLinkedList.printList());
+// console.log(myLinkedList.printList());
 myLinkedList.remove(4);
 console.log(myLinkedList.printList());
 
+
+// Exercise : Reverse the a singly linked list
+
+// [ 1, 10, 99, 5, 88 ] => [ 88, 5, 99, 10, 1 ]
+
+// my solution 1: Iterate each Node elements and prepend elements.
+let cnt = 1;
+let currentNode = myLinkedList.head;
+const newLinkedList = new LinkedList(myLinkedList.head.value);
+while (cnt < myLinkedList.length) {
+    currentNode = currentNode.next;
+    newLinkedList.prepend(currentNode.value);
+    cnt++;
+}
+
+console.log(newLinkedList.printList());
