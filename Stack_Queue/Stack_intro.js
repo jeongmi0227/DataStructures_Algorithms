@@ -51,7 +51,7 @@ class Node {
 }
 
 // Create Stack with linked list (My solution)
-class Stack{
+class MyStack{
     constructor() {
         this.top = null;
         this.bottom = null;
@@ -103,23 +103,90 @@ class Stack{
         }
     }
 }
+// Create Stack with linked list
+class Stack {
+    constructor() {
+        this.top = null;
+        this.bottom = null;
+        this.length = 0;
+    }
 
-const myStack = new Stack();
-console.log(myStack.isEmpty());
+    peek() {
+        return this.top;
+    }
+
+    push(value) {
+        const newNode = new Node(value);
+        if (this.length === 0) {
+            this.top = newNode;
+            this.bottom = newNode;
+        } else {
+            const holdingPointer = this.top;
+            this.top = newNode;
+            this.top.next = holdingPointer;
+        }
+        this.length++;
+        return this;
+    }
+
+    pop() {
+        if (!this.top) {
+            return null;
+        }
+        if (this.top === this.bottom) {
+            this.bottom = null;
+        }
+
+        const holdingPointer = this.top;
+        this.top = this.top.next;
+        this.length--;
+        return this;
+    }
+
+}
+
+
+// Create Stack with Array
+// Array already has push and pop function no need to implement in here
+class ArrayStack {
+    constructor() {
+        this.array = [];
+    }
+
+    peek() {
+        return this.array[this.array.length - 1];
+    }
+
+    push(value) {
+        this.array.push(value);
+        return this;
+    }
+
+    pop() {
+        this.array.pop();
+        return this;
+    }
+
+}
+
+
+// const myStack = new Stack();
+const myStack = new ArrayStack();
+// console.log(myStack.isEmpty());
 myStack.push('google');
 myStack.push('udemy');
 myStack.push('amazon');
 myStack.push('facebook');
-console.log(myStack.isEmpty());
+// console.log(myStack.isEmpty());
 
 
 console.log(myStack.peek());
 myStack.pop();
 console.log(myStack.peek());
-myStack.pop();
-console.log(myStack.peek());
-myStack.pop();
-console.log(myStack.isEmpty());
-console.log(myStack.peek());
-myStack.pop();
-console.log(myStack.isEmpty());
+// myStack.pop();
+// console.log(myStack.peek());
+// myStack.pop();
+// console.log(myStack.isEmpty());
+// console.log(myStack.peek());
+// myStack.pop();
+// console.log(myStack.isEmpty());
