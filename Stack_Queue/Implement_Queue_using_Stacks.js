@@ -45,62 +45,98 @@ All the calls to pop and peek are valid.
 Follow-up: Can you implement the queue such that each operation is amortized O(1) time complexity? 
 In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.
  */
-class Queue{
+class MyQueue{
     constructor() {
-        this.first = null;
-        this.last = null;
-        this.length = 0;
+        this.stack1 = [];
+        this.stack2 = [];
     }
 
-    peek() { }
+    peek() { 
+        return this.stack1[this.stack1.length - 1];
+    }
     
-    push() { }
+    push(value) { 
+     
+        let len1= this.stack1.length;
+        for (let i = 0; i < len1; i++) {
+            this.stack2.push(this.stack1.pop());
+        }
+
+        this.stack1.push(value);
+        let len2 = this.stack2.length;
+        for (let i = 0; i < len2; i++){
+            this.stack1.push(this.stack2.pop());
+        }
+        
+    }
     
-    pop() { }
+    pop() { 
+        return this.stack1.pop();
+    }
     
-    empty() {}
+    empty() {
+        return (this.stack1.length == 0) ? true : false;
+    }
 }
 
-var MyQueue = function() {
-    
-};
+const obj = new MyQueue();
+obj.push(1);
+// console.log(obj);
+obj.push(2);
+// console.log(obj);
+obj.push(3);
+obj.push(4);
+console.log(obj);
+console.log(obj.peek());
+console.log(obj.pop());
+console.log(obj.peek());
+console.log(obj);
+console.log(obj.pop());
+console.log(obj.pop());
+console.log(obj.pop());
+console.log(obj.empty());
 
-/** 
- * @param {number} x
- * @return {void}
- */
-MyQueue.prototype.push = function(x) {
-    
-};
+class CrazyQueue{
+    constructor() {
+        this.first = [];
+        this.last = [];
+    }
 
-/**
- * @return {number}
- */
-MyQueue.prototype.pop = function() {
-    
-};
+    enqueue(value) {
+        const length = this.first.length;
+        for (let i = 0; i < length; i++){
+            this.last.push(this.first.pop());
+        }
+        this.last.push(value);
+        return this;
+    }
 
-/**
- * @return {number}
- */
-MyQueue.prototype.peek = function() {
-    
-};
+    dequeue() {
+        const length = this.last.length;
+        for (let i = 0; i < length; i++){
+            this.first.push(this.last.pop());
+        }
+        this.first.pop();
+        return this;
+    }
 
-/**
- * @return {boolean}
- */
-MyQueue.prototype.empty = function() {
-    
-};
+    peek() {
+        if (this.last.length > 0) {
+            return this.last[0];
+        }
 
-/** 
- * Your MyQueue object will be instantiated and called as such:
- * var obj = new MyQueue()
- * obj.push(x)
- * var param_2 = obj.pop()
- * var param_3 = obj.peek()
- * var param_4 = obj.empty()
- */
+        return this.first[this.first.length - 1];
+    }
+}
 
-
+const myQueue = new CrazyQueue();
+myQueue.peek();
+myQueue.enqueue('Joy');
+myQueue.enqueue('Matt');
+myQueue.enqueue('Pavel');
+console.log(myQueue);
+myQueue.peek();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.peek();
