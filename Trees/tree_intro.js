@@ -75,27 +75,56 @@ class Node {
 }
 
 class BinarySearchTree{
+    
     constructor() {
         this.root = null;
     }
+
     insert(value) {
         const newNode = new Node(value);
         if (this.root === null) {
             this.root = newNode;
         } else {
-                // left tree
-            console.log(this.root.value);
-            console.log(this.root.left);
-       
+            let currentNode = this.root;
+            while (true) {
+                if (value < currentNode.value) {
+                    if (!currentNode.left) {
+                        currentNode.left = newNode;
+                        return this;
+                    } 
+                    currentNode = currentNode.left;
+                } else {
+                    if (!currentNode.right) {
+                        currentNode.right = newNode;
+                        return this;
+                    } 
+                    currentNode = currentNode.right;
+                }
+          
+            }
         }
+    }
 
-        return this.root;
-    }
     lookup(value) {
-        
+        if (!this.root) {
+            return false;
+        } 
+
+        let currentNode = this.root;
+
+        while (currentNode) {
+            if (currentNode.value > value) {
+                currentNode = currentNode.left;
+            } else if (currentNode.value < value) {
+                currentNode = currentNode.right;
+            } else if(currentNode.value===value){
+                return currentNode;
+            }
+        }
+        return false;
     }
-    // remove
 }
+    // remove
 
 const tree = new BinarySearchTree();
 
@@ -103,13 +132,13 @@ tree.insert(9);
 
 
 tree.insert(4);
-
-console.log(tree);
-// tree.insert(6);
-// tree.insert(20);
-// tree.insert(170);
-// tree.insert(15);
-// tree.insert(1);
+tree.insert(6);
+tree.insert(20);
+tree.insert(170);
+tree.insert(15);
+tree.insert(1);
+console.log(traverse(tree.root));
+console.log(tree.lookup(20));
 //      9
 //  4       20
 //1 6   15      170
