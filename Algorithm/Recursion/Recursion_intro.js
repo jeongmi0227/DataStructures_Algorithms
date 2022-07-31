@@ -20,6 +20,10 @@
  * Recursion might be good option when we are not really sure how deep the data structures are, 
  * where we don't know how many loops to go through.
  * Recursion might be useful for things such as tree data structures and doing traversal
+ * 
+ * Tail call iptimization
+ * 
+ * When to use recursion?
  */
 
 let counter = 0;
@@ -95,4 +99,16 @@ function fibonacciRecursive(n) {
     return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
 }
 // console.log(fibonacciRecursive(5));
+
+// Complicated problems like traversing or searching through trees or graphs,
+// BFS, DFS (searching) is useful and better than iterative approaches
+
+// New Rules 
+// Every time you are using a tree or converting something into a tree, consider recursion
+
+// 1. Divided into a number of subproblems that are smaller instances of the same problem.
+// 2. Each instance of the subproblem is identical in nature
+// 3. The solutions of each subproblem can be combined to solve the problem at hand.
+
+// Divide and Conquer using Recursion
 
