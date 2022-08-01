@@ -87,7 +87,7 @@ function fibonacciIterative(n) { //O(n)
     return arr[n];
 
 }
-console.log(fibonacciIterative(3));
+// console.log(fibonacciIterative(3));
 
  // O(2^N) expotential - recursive algorithms that solve a problem of size N.
  // Fibonacci sequence and recursion can be made to over O(n) using dynamic programming.
@@ -106,9 +106,60 @@ function fibonacciRecursive(n) {
 // New Rules 
 // Every time you are using a tree or converting something into a tree, consider recursion
 
-// 1. Divided into a number of subproblems that are smaller instances of the same problem.
+// 1. Divided into a number of subproblems that are smaller instances of the same problem. (ex. Fibonacci numbers or factorial)
 // 2. Each instance of the subproblem is identical in nature
 // 3. The solutions of each subproblem can be combined to solve the problem at hand.
 
 // Divide and Conquer using Recursion
+
+//Implement a function that reverses a string using iteration...and then recursion!
+
+// iterative 
+function reverseStringIterative(str) {
+    let arr = [...str];
+    let newArr = '';
+
+    for (let i = arr.length-1; i >= 0; i--){
+        newArr += arr[i];
+    }
+
+    return newArr;
+}
+
+function reverseStringSolution(str) {
+ 
+    let arr = [...str];
+    if (arr.length > 0) {
+        return arr.pop()+reverseStringSolution(arr);
+    }
+}
+console.log(reverseStringSolution('yoyo mastery'));
+
+// function reverseStringRecursive (str) {
+//     if (str === "") {
+//       return "";
+//     } else {
+//       return reverseStringRecursive(str.substr(1)) + str.charAt(0);
+//     }
+// }
+
+// function reverseString(str) {
+//     let arrayStr = str.split("");
+//     let reversedArray = [];
+//     //We are using closure here so that we don't add the above variables to the global scope.
+//     function addToArray(array) {
+      
+//       if(array.length > 0) {
+//         reversedArray.push(array.pop());
+//         addToArray(array);
+//       }
+//       return;
+//     }
+//     addToArray(arrayStr);
+//     return reversedArray.join("");
+//   }
+
+// console.log(reverseString('yoyo mastery'));
+// console.log(reverseString('yoyo mastery'));
+//should return: 'yretsam oyoy'
 
