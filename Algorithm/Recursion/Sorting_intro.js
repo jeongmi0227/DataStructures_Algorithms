@@ -1,7 +1,7 @@
 /**
  * Bubble Sort
- * Insertion Sort
  * Selection Sort
+ * Insertion Sort
  * Merge Sort
  * Quick Sort
  */
@@ -56,22 +56,106 @@ function selectionSort(array) {
     }
 }
 
-console.log('Before selectionSort');
-console.log(numbers);
+// console.log('Before selectionSort');
+// console.log(numbers);
 
-selectionSort(numbers);
+// selectionSort(numbers);
 
-console.log('After selectionSort');
-console.log(numbers);
+// console.log('After selectionSort');
+// console.log(numbers);
 
+// This type of sorting performs well when it comes to small small data sets 
+// Time complexity
+// Best case O(n)
+// Average and worst O(n^2) 
 
+// Space complexity
+// O(1)
 const numbers2 = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+// My insertion sort solution
+function MyinsertionSort(array) {
+    let length = array.length;
+    let tmp;
 
-function insertionSort(array) {
-  
+    if (length <= 1) {
+        return array;
+    }
+
+    for (let i = 1; i <= length; i++) {
+        for (let j = i - 1; j >= 0; j--) {
+            if (array[i] < array[j]) {
+                tmp = array[j];
+                array[j] = array[i];
+                array[i] = tmp;
+            }
+            if (array[j] < array[j - 1]) {
+                tmp = array[j];
+                array[j] = array[j - 1];
+                array[j - 1] = tmp;
+            }
+            
+        }
+    }
+    return array;    
 }
 
 
+function insertionSort(array) {
+    const length = array.length;
+      for (let i = 0; i < length; i++) {
+          if (array[i] < array[0]) {
+        //move number to the first position
+        array.unshift(array.splice(i,1)[0]);
+      } else {
+        // only sort number smaller than number on the left of it. This is the part of insertion sort that makes it fast if the array is almost sorted.
+        if (array[i] < array[i-1]) {
+          //find where number should go
+          for (var j = 1; j < i; j++) {
+            if (array[i] >= array[j-1] && array[i] < array[j]) {
+              //move number to the right spot
+              array.splice(j,0,array.splice(i,1)[0]);
+            }
+          }
+        }
+      }
+      }
+  }
+  
+  // Other insertion sort solution
+  function insertionSort(arr)  
+  {  
+      let n = arr.length;
+      let i, key, j;  
+      for (i = 1; i < n; i++) 
+      {  
+          key = arr[i];  
+          j = i - 1;  
+      
+          /* Move elements of arr[0..i-1], that are  
+          greater than key, to one position ahead  
+          of their current position */
+          while (j >= 0 && arr[j] > key) 
+          {  
+              arr[j + 1] = arr[j];  
+              j = j - 1;  
+          }  
+          arr[j + 1] = key;  
+      }  
+  }  
+      
+  // Other insertion sort solution
+  function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+      let currentValue = arr[i]
+      let j
+      for (j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+        arr[j + 1] = arr[j]
+      }
+      arr[j + 1] = currentValue
+    }
+    return arr
+  }
+  
 console.log('Before insertionSort');
 console.log(numbers2);
 
