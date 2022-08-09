@@ -156,9 +156,35 @@ function insertionSort(array) {
     return arr
   }
   
-console.log('Before insertionSort');
-console.log(numbers2);
+// console.log('Before insertionSort');
+// console.log(numbers2);
 
-insertionSort(numbers2);
-console.log('After insertionSort');
-console.log(numbers2);
+// insertionSort(numbers2);
+// console.log('After insertionSort');
+// console.log(numbers2);
+
+
+// Merge Sort O(n log n)
+// Quick Sort use Divide and & Conquer the idea of recursion
+// log(n) is kind of like the height of the tree
+const numbers3 = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function mergeSort (array) {
+  if (array.length === 1) {
+    return array
+  }
+  // Split Array in into right and left
+
+  return merge(
+    mergeSort(left),
+    mergeSort(right)
+  )
+}
+
+function merge(left, right){
+
+}
+
+
+const answer = mergeSort(numbers3);
+console.log(answer);
