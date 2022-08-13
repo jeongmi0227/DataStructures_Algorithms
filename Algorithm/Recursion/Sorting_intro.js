@@ -207,5 +207,83 @@ function merge(left, right){
 }
 
 
-const answer = mergeSort(numbers3);
-console.log(answer);
+// const answer = mergeSort(numbers3);
+// console.log(answer);
+
+
+// Quick sort
+// Just like merge sort (divide and conquer algorithm)
+// O(n log n)
+// Quick sort uses pivoting technique to break the main list into smaller lists
+// and these smaller lists use the pivoting technique until they are sorted.
+// Quicksort space complexity is O(log(n)) better than Mergesort
+// Time complexity worst case is O(n^2) if the pivot is the smallest or the largest item in the list. Not really splitting the list in half.
+// Have to pick a good pivot for quicksort.
+
+// If the list was pre-sorted for whatever reason, in that list, if we pick the pivot to be the first item or the last item, 
+// then sort routine will take very long time.
+// Ideally in a quicksort picking the pivot intelligently based on list.
+// Quicksort has a lot of variance to it and there's different implementations.
+// However, Quicksort is usually the fastest on average, but the one downside is that it has some pretty nasty worst case behaviors.
+
+const numbers4 = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function quickSort(array, left, right){
+  const len = array.length; 
+  let pivot;
+  let partitionIndex;
+
+  if(left < right) {
+    pivot = right;
+    partitionIndex = partition(array, pivot, left, right);
+    
+    //sort left and right
+    quickSort(array, left, partitionIndex - 1);
+    quickSort(array, partitionIndex + 1, right);
+  }
+  return array;
+}
+   
+function partition(array, pivot, left, right){
+  let pivotValue = array[pivot];
+  let partitionIndex = left;
+
+  for(let i = left; i < right; i++) {
+    if(array[i] < pivotValue){
+      swap(array, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(array, right, partitionIndex);
+  return partitionIndex;
+}
+
+function swap(array, firstIndex, secondIndex){
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+//Select first and last index as 2nd and 3rd parameters
+quickSort(numbers4, 0, numbers4.length - 1);
+console.log(numbers4);
+
+// When to use what?
+// When should we use insertion sort? (Only a few items and mostly sorted data)
+// asnwer: Insertion sort should be used with only a few items if your input is small or items are mostly sroted then it is really fast.
+// It uses very little space( O(1)), and more importantly, it's really easy to implement in code.
+
+// When should we use bubble sort?
+// answer: It's very rare that we'll find this in real life because it is not very efficient. 
+// It's only really used for educational purposes as a way to teach sorting.
+// When should we use selectio sort?
+// answer: Won't be using it. Mostly it's being used as a teaching mechanism.
+
+// When should we use mergesort?
+// answer: If you are worried about worst case scenarios, then you should use merge sort.
+// But if you want to sort in memeory on you machine and you're worried about space complexity, 
+// merge sort is going to be really expensive to use this space.
+
+
+// when should we use quicksort?
+// answer: It has the same speed as time as merge sort but less space complexity. If you are worried about worst case then pick other sorting algorithm
