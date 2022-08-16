@@ -20,7 +20,7 @@
  * Recursion might be good option when we are not really sure how deep the data structures are, 
  * where we don't know how many loops to go through.
  * Recursion might be useful for things such as tree data structures and doing traversal
- * 
+ * Note : be mindful of space complexity and stack overflow
  * Tail call iptimization
  * 
  * When to use recursion?

@@ -287,3 +287,19 @@ console.log(numbers4);
 
 // when should we use quicksort?
 // answer: It has the same speed as time as merge sort but less space complexity. If you are worried about worst case then pick other sorting algorithm
+
+
+// Can we beat O(n log n)?
+// Comparsion sort
+// Bubble sort
+// Insertion sort
+// Selection sort
+// Merge sort (anytype)
+// Quick sort (anytype)
+
+// Non-comparsion sort ( use numbers and data is stored on our computers in zeros and ones and take advantage of that fact ot sort things)
+// These two sorting algorithms only work with numbers, specifically integers in a restricted range.
+// Counting sort
+// Radix sort
+
+
