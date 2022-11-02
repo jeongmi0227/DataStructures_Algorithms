@@ -273,9 +273,67 @@ class BinarySearchTree {
         return this.breadthFirstSearchR(queue, list);
 
     }
-}
-    
+    // Recursion
+    DFSInorder() { 
+        return traverseInOrder(this.root, []);
+    }
 
+    // Recursion
+    DFSPostorder() { 
+        return traversePostOrder(this.root, []);
+    }
+
+    // Recursion
+    DFSPreorder() { 
+        return traversePreOrder(this.root, []);
+    }
+}
+// Using stack data structure
+// Space complexity 
+function traverseInOrder(node, list) {
+    // console.log(node.value);
+    if (node.left) {
+        traverseInOrder(node.left, list);
+    }
+    list.push(node.value);
+    if (node.right) {
+        traverseInOrder(node.right, list);
+    }
+    return list;
+}
+
+function traversePreOrder(node, list) {
+    // console.log(node.value);
+    list.push(node.value);
+    if (node.left) {
+        traversePreOrder(node.left, list);
+    }
+    if (node.right) {
+        traversePreOrder(node.right, list);
+    }
+    return list;
+}
+
+
+function traversePostOrder(node, list) {
+    // console.log(node.value);
+    if (node.left) {
+        traversePostOrder(node.left, list);
+    }
+    if (node.right) {
+        traversePostOrder(node.right, list);
+    }
+    list.push(node.value);
+    return list;
+}
+
+//      9
+//  4       20
+//1   6   15    170
+// DFS
+// InOrder - [1, 4, 6, 9, 15, 20, 170]
+// PreOrder - [9, 4, 1, 6, 20, 15, 170] it's better way to recreate the tree
+// PostOrder - [1, 6, 4, 15, 170, 20, 9]
 const tree = new BinarySearchTree();
 
 tree.insert(9);
@@ -287,7 +345,11 @@ tree.insert(20);
 tree.insert(170);
 tree.insert(15);
 tree.insert(1);
-console.log(tree.breadthFirstSearch());
+// console.log(tree.breadthFirstSearch());
+// console.log(tree.breadthFirstSearchR([tree.root],[]));
+console.log(tree.DFSInorder());
+console.log(tree.DFSPreorder());
+console.log(tree.DFSPostorder());
 
-console.log(tree.breadthFirstSearch([tree.root],[]));
+
 
