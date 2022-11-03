@@ -55,7 +55,7 @@
 
 
 // DFS
-// If you know that the node is likely at the lower level of a graph, 
+// If you know that the n   ode is likely at the lower level of a graph, 
 // Perhaps depth where search is better in that case (opposite to BFS)
 
 // Advantage: Good at asking the question does the path exist to a certain node from a source node to a target node
@@ -83,6 +83,13 @@
 
 //Finding the shortest path:
 // BFS
+
+// Bellman Ford algorithm VS Dijkstra Algorithms 
+// Bellman ford algorithm is very effective at solving the shortest path over Dijkstra's algorithm because it can accommodate negative weights.
+// Bellman ford algorithm takes more time to run in terms of complexity O(n)^2
+// Dijkstra algorithm is more efficient and faster. The only downside is that it cannot accommodate for negative weights between nodes.
+
+
 class Node {
     constructor(value) {
         this.left = null;
